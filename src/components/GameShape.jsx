@@ -13,6 +13,7 @@ const ID_TYPE = PropTypes.string;
 // the shape of one side of the competition - e.g. home or visitor
 const SideShape = PropTypes.shape(
   {
+    gameId: PropTypes.string.isRequired,
     score: PropTypes.shape(
       {
         score: PropTypes.number.isRequired
@@ -45,7 +46,7 @@ GameShape = PropTypes.shape(
     // optional: the label for the game within the bracket, e.g. Gold Finals, Silver Semi-Finals
     bracketLabel: PropTypes.string,
     // the unix timestamp of the game-will be transformed to a human-readable time using momentjs
-    scheduled: PropTypes.number.isRequired,
+    scheduled: PropTypes.number,
     // where the game is played
     court: PropTypes.shape({
       name: PropTypes.string.isRequired,

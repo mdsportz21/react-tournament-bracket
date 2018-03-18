@@ -13,11 +13,13 @@ class BracketGame extends PureComponent {
 
     hoveredTeamId: PropTypes.string,
     onHoveredTeamIdChange: PropTypes.func.isRequired,
+    onSideClick: PropTypes.func.isRequired,
 
     styles: PropTypes.shape(
       {
         backgroundColor: PropTypes.string.isRequired,
         hoverBackgroundColor: PropTypes.string.isRequired,
+        selectedColor: PropTypes.string.isRequired,
         scoreBackground: PropTypes.string.isRequired,
         winningScoreBackground: PropTypes.string.isRequired,
         teamNameStyle: PropTypes.object.isRequired,
@@ -38,6 +40,7 @@ class BracketGame extends PureComponent {
     styles: {
       backgroundColor: '#58595e',
       hoverBackgroundColor: '#222',
+      selectedColor: '#ff0000',
 
       scoreBackground: '#787a80',
       winningScoreBackground: '#ff7324',
@@ -58,10 +61,12 @@ class BracketGame extends PureComponent {
 
       hoveredTeamId,
       onHoveredTeamIdChange,
+      onSideClick,
 
       styles: {
         backgroundColor,
         hoverBackgroundColor,
+        selectedColor,
         scoreBackground,
         winningScoreBackground,
         teamNameStyle,
@@ -78,7 +83,7 @@ class BracketGame extends PureComponent {
       ...rest
     } = this.props;
 
-    const { sides } = game;
+    const { sides, selected } = game;
 
     const top = sides[ homeOnTop ? HOME : VISITOR ],
       bottom = sides[ homeOnTop ? VISITOR : HOME ];
@@ -91,11 +96,11 @@ class BracketGame extends PureComponent {
       ) :
       null;
 
-    const Side = ({ x, y, side, onHover }) => {
+    const Side = ({ x, y, side, onHover, onClick }) => {
       const tooltip = side.seed && side.team ? <title>{side.seed.displayName}</title> : null;
 
       return (
-        <g onMouseEnter={() => onHover(side && side.team ? side.team.id : null)} onMouseLeave={() => onHover(null)}>
+        <g onClick={() => onClick(side)} onMouseEnter={() => onHover(side && side.team ? side.team.id : null)} onMouseLeave={() => onHover(null)}>
           {/* trigger mouse events on the entire block */}
           <rect x={x} y={y} height={22.5} width={200} fillOpacity={0}>
             {tooltip}
@@ -120,22 +125,17 @@ class BracketGame extends PureComponent {
       bottomHovered = (bottom && bottom.team && bottom.team.id === hoveredTeamId);
 
     return (
-      <svg width="200" height="82" viewBox="0 0 200 82" {...rest}>
-        {/* game time */}
-        <text x="100" y="8" textAnchor="middle" style={gameTimeStyle}>
-          { topText(game) }
-        </text>
-
+      <svg className="bracketGame" width="200" height="82" viewBox="0 0 200 82" {...rest}>
         {/* backgrounds */}
 
         {/* base background */}
-        <rect x="0" y="12" width="200" height="45" fill={backgroundColor} rx="3" ry="3"/>
+        <rect x="0" y="12" width="200" height="45" fill={selected ? selectedColor : backgroundColor} rx="3" ry="3"/>
 
         {/* background for the top team */}
-        <rect x="0" y="12" width="200" height="22.5" fill={topHovered ? hoverBackgroundColor : backgroundColor} rx="3"
+        <rect x="0" y="12" width="200" height="22.5" fill={topHovered ? hoverBackgroundColor : (selected ? selectedColor : backgroundColor)} rx="3"
               ry="3"/>
         {/* background for the bottom team */}
-        <rect x="0" y="34.5" width="200" height="22.5" fill={bottomHovered ? hoverBackgroundColor : backgroundColor}
+        <rect x="0" y="34.5" width="200" height="22.5" fill={bottomHovered ? hoverBackgroundColor : (selected ? selectedColor : backgroundColor)}
               rx="3" ry="3"/>
 
         {/* scores background */}
@@ -147,13 +147,13 @@ class BracketGame extends PureComponent {
         {/* the players */}
         {
           top ? (
-            <Side x={0} y={12} side={top} onHover={onHoveredTeamIdChange}/>
+            <Side x={0} y={12} side={top} onHover={onHoveredTeamIdChange} onClick={onSideClick}/>
           ) : null
         }
 
         {
           bottom ? (
-            <Side x={0} y={34.5} side={bottom} onHover={onHoveredTeamIdChange}/>
+            <Side x={0} y={34.5} side={bottom} onHover={onHoveredTeamIdChange} onClick={onSideClick}/>
           ) : null
         }
 

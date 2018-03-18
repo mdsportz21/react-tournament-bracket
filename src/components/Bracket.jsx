@@ -119,7 +119,7 @@ export default class Bracket extends Component {
 
     return (
       <svg {...svgDimensions}>
-        <g>
+        <g className="bracket">
           {
             toBracketGames(
               {

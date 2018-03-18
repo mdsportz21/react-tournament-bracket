@@ -91,7 +91,7 @@ export default class BracketGenerator extends Component {
     const { finals } = this.state;
 
     return (
-      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', ...style }}>
+      <div className="bracketGenerator" style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', ...style }}>
         {
           _.map(
             finals,
