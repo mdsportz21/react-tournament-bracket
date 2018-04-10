@@ -40,7 +40,7 @@ class BracketGame extends PureComponent {
     styles: {
       backgroundColor: '#58595e',
       hoverBackgroundColor: '#222',
-      selectedColor: '#ff0000',
+      // selectedColor: '#ff0000',
 
       scoreBackground: '#787a80',
       winningScoreBackground: '#ff7324',
