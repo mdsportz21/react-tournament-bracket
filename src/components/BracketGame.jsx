@@ -40,7 +40,7 @@ class BracketGame extends PureComponent {
 
     styles: {
       backgroundColor: '#58595e',
-      hoverBackgroundColor: '#222',
+      hoverBackgroundColor: '#222', // this is being ignored below
       selectedColor: '#ffcc00',
 
       scoreBackground: '#787a80',
@@ -125,8 +125,8 @@ class BracketGame extends PureComponent {
       );
     };
 
-    const topHovered = (top && top.team && top.team.id === hoveredTeamId),
-      bottomHovered = (bottom && bottom.team && bottom.team.id === hoveredTeamId);
+    const topHovered = false, //(top && top.team && top.team.id === hoveredTeamId),
+      bottomHovered = false ; //(bottom && bottom.team && bottom.team.id === hoveredTeamId);
 
     return (
       <svg className="bracketGame" width="200" height="82" viewBox="0 0 200 82" {...rest}>
