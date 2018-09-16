@@ -40,11 +40,12 @@ class BracketGame extends PureComponent {
     styles: {
       backgroundColor: '#58595e',
       hoverBackgroundColor: '#222',
-      // selectedColor: '#ff0000',
+      selectedColor: '#ffcc00',
 
       scoreBackground: '#787a80',
       winningScoreBackground: '#ff7324',
       teamNameStyle: { fill: '#fff', fontSize: 12, textShadow: '1px 1px 1px #222' },
+      selectedTeamNameStyle: { fill: '#000', fontSize: 12 },
       teamScoreStyle: { fill: '#23252d', fontSize: 12 },
       gameNameStyle: { fill: '#999', fontSize: 10 },
       gameTimeStyle: { fill: '#999', fontSize: 10 },
@@ -96,8 +97,9 @@ class BracketGame extends PureComponent {
       ) :
       null;
 
-    const Side = ({ x, y, side, onHover, onClick }) => {
+    const Side = ({ x, y, side, onHover, onClick, selected }) => {
       const tooltip = side.seed && side.team ? <title>{side.seed.displayName}</title> : null;
+      const sideStyle = selected ? selectedTeamNameStyle : teamNameStyle;
 
       return (
         <g onClick={() => onClick(side)} onMouseEnter={() => onHover(side && side.team ? side.team.id : null)} onMouseLeave={() => onHover(null)}>
@@ -108,7 +110,7 @@ class BracketGame extends PureComponent {
 
           <RectClipped x={x} y={y} height={22.5} width={165}>
             <text x={x + 5} y={y + 16}
-                  style={{ ...teamNameStyle, fontStyle: side.seed && side.seed.sourcePool ? 'italic' : null }}>
+                  style={{ ...sideStyle, fontStyle: side.seed && side.seed.sourcePool ? 'italic' : null }}>
               {tooltip}
               {side.team ? side.team.name : (side.seed ? side.seed.displayName : null)}
             </text>
@@ -147,13 +149,13 @@ class BracketGame extends PureComponent {
         {/* the players */}
         {
           top ? (
-            <Side x={0} y={12} side={top} onHover={onHoveredTeamIdChange} onClick={onSideClick}/>
+            <Side x={0} y={12} side={top} onHover={onHoveredTeamIdChange} onClick={onSideClick} selected={selected}/>
           ) : null
         }
 
         {
           bottom ? (
-            <Side x={0} y={34.5} side={bottom} onHover={onHoveredTeamIdChange} onClick={onSideClick}/>
+            <Side x={0} y={34.5} side={bottom} onHover={onHoveredTeamIdChange} onClick={onSideClick} selected={selected}/>
           ) : null
         }
 
