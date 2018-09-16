@@ -537,8 +537,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        );
 	      };
 
-	      var topHovered = top && top.team && top.team.id === hoveredTeamId,
-	          bottomHovered = bottom && bottom.team && bottom.team.id === hoveredTeamId;
+	      var topHovered = false,
+	          //(top && top.team && top.team.id === hoveredTeamId),
+	      bottomHovered = false; //(bottom && bottom.team && bottom.team.id === hoveredTeamId);
 
 	      return _react2.default.createElement(
 	        "svg",
@@ -596,7 +597,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  styles: {
 	    backgroundColor: '#58595e',
-	    hoverBackgroundColor: '#222',
+	    hoverBackgroundColor: '#222', // this is being ignored below
 	    selectedColor: '#ffcc00',
 
 	    scoreBackground: '#787a80',
