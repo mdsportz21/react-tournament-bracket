@@ -474,6 +474,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          gameNameStyle = _props$styles.gameNameStyle,
 	          gameTimeStyle = _props$styles.gameTimeStyle,
 	          teamSeparatorStyle = _props$styles.teamSeparatorStyle,
+	          selectedTeamNameStyle = _props$styles.selectedTeamNameStyle,
 	          homeOnTop = _props.homeOnTop,
 	          topText = _props.topText,
 	          bottomText = _props.bottomText,
@@ -582,7 +583,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    teamNameStyle: _react.PropTypes.object.isRequired,
 	    teamScoreStyle: _react.PropTypes.object.isRequired,
 	    gameNameStyle: _react.PropTypes.object.isRequired,
-	    teamSeparatorStyle: _react.PropTypes.object.isRequired
+	    teamSeparatorStyle: _react.PropTypes.object.isRequired,
+	    selectedTeamNameStyle: _react.PropTypes.object.isRequired
 	  }),
 
 	  topText: _react.PropTypes.func,

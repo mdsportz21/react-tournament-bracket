@@ -25,7 +25,8 @@ class BracketGame extends PureComponent {
         teamNameStyle: PropTypes.object.isRequired,
         teamScoreStyle: PropTypes.object.isRequired,
         gameNameStyle: PropTypes.object.isRequired,
-        teamSeparatorStyle: PropTypes.object.isRequired
+        teamSeparatorStyle: PropTypes.object.isRequired,
+        selectedTeamNameStyle: PropTypes.object.isRequired
       }
     ),
 
@@ -74,7 +75,8 @@ class BracketGame extends PureComponent {
         teamScoreStyle,
         gameNameStyle,
         gameTimeStyle,
-        teamSeparatorStyle
+        teamSeparatorStyle,
+        selectedTeamNameStyle
       },
 
       homeOnTop,
